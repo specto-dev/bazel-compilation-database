@@ -213,7 +213,7 @@ def _objc_compiler_info(ctx, target, srcs, feature_configuration, cc_toolchain):
 
     frameworks = (["-F {}/..".format(val) for val in target.objc.static_framework_paths.to_list()] +
                   ["-F {}/..".format(val) for val in target.objc.dynamic_framework_paths.to_list()] +
-                  ["-F {}/..".format(val) for val in target.objc.framework_search_path_only.to_list()])
+                  ["-F {}/..".format(val) for val in dep[CcInfo].compilation_context.framework_includes.to_list()])
 
     xcode_config = ctx.attr._xcode_config[apple_common.XcodeVersionConfig]
 
@@ -376,5 +376,5 @@ _compilation_database = rule(
 def compilation_database(**kwargs):
     _compilation_database(
         filename = kwargs.pop("filename", "compile_commands.json"),
-        **kwargs,
+        **kwargs
     )
