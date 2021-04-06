@@ -213,7 +213,7 @@ def _objc_compiler_info(ctx, target, srcs, feature_configuration, cc_toolchain):
 
     frameworks = (["-F {}/..".format(val) for val in target.objc.static_framework_paths.to_list()] +
                   ["-F {}/..".format(val) for val in target.objc.dynamic_framework_paths.to_list()] +
-                  ["-F {}/..".format(val) for val in dep[CcInfo].compilation_context.framework_includes.to_list()])
+                  ["-F {}/..".format(val) for val in target[CcInfo].compilation_context.framework_includes.to_list()])
 
     xcode_config = ctx.attr._xcode_config[apple_common.XcodeVersionConfig]
 
